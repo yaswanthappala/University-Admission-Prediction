@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Graduates ML  API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/graduatescss.css') }}">
+
+<style>
+::placeholder 
+{
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+.login
+{
+top: 20%;
+left: 50%;
+}
+</style>
+</head>
+
+<body>
+  <style type="text/css">
+  body
+  {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('https://images.unsplash.com/photo-1472289065668-ce650ac443d2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80')
+  }
+  input 
+  { 
+    width: 100%; 
+    margin-bottom: 10px; 
+    background: rgba(0,0,0,0.3);
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 15px;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 20px;
+    box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+    -webkit-appearance: none;
+    -webkit-transition: box-shadow .5s ease;
+    -moz-transition: box-shadow .5s ease;
+    -moz-appearance: textfield;
+    -o-transition: box-shadow .5s ease;
+    -ms-transition: box-shadow .5s ease;
+    transition: box-shadow .5s ease;
+  }
+  input:focus 
+  { 
+    box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); 
+  }
+  label
+  {
+    padding: 10px;
+    font-size: 17px;
+    color: black;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+  }
+  select
+  {
+    font-size: 15px;
+    background: rgba(0,0,0,0.3);
+  }
+   
+  </style>
+ <div class="login">
+  <h1><p style="color:Black;">University Admission Prediction</p></h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('y_predict')}}"method="post">
+
+      <!---<p style="color:Black;">Enter your GRE Score(340):<br></p>-->
+      <input type="number" step="1" min="0" max="340" name="GRE" placeholder="Enter your score in GRE" required="required" /></span>
+      <!---Enter your TOEFL Score(120):<br>-->
+      <input type="number" step="1" min="0" max="120" name="TOEFL" placeholder="Enter your score in TOEFL" required="required" />
+      <!---Enter the Universit Rating (5):<br>-->
+      <input type="number" step="0.01" min="0" max="5" name="University Rating" placeholder="Enter your University Rating" required="required" />
+      <!---Enter the SOP points(5):<br>-->
+      <input type="number" step="0.01" min="0" max="5" name="SOP" placeholder="Enter your SOP points" required="required" />
+      <!---Enter the LOR points(5):<br>-->
+      <input type="number" step="0.1" min="0" max="5" name="Letter of Recommendation" placeholder="Enter the Letter of Recomendation points" required="required" />
+      <!---Enter your CGPA(10):<br>-->
+      <input type="number" step="0.01" min="0" max="10" name="CGPA" placeholder="Enter your CGPA" required="required" /> 
+      <!---Enter your Research status(1/0):<br>-->
+      <label for="Research">Enter Research:</label>
+      <select name="Research" required="required">
+        <option value="">Select here</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+      <br>
+      <br>
+      <button type="submit" class="btn btn-primary btn-block btn-large">PREDICT</button>
+
+    </form>
+
+   <br>
+   {{ prediction_text }}
+
+ </div>
+
+
+</body>
+</html>
+
